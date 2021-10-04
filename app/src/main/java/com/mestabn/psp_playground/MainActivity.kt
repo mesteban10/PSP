@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             //postDeLayed()
             //launchMultipleThreads()
             //LaunchProgressBar()
-            LaunchProgressBar2()
+            LaunchProgressBarInFor()
         }
 
     }
@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
         }).start()
     }
 
-    private fun LaunchProgressBar2() {
+    private fun LaunchProgressBarInFor() {
         Thread(Runnable {
             for (i in 1..10) {
                 runOnUiThread {
