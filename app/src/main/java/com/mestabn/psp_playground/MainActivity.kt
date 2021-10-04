@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
             //launchInsideThread2()
             //postDeLayed()
             //launchMultipleThreads()
-            LaunchProgressBar()
-
+            //LaunchProgressBar()
+            LaunchProgressBar2()
         }
 
     }
@@ -206,6 +206,22 @@ class MainActivity : AppCompatActivity() {
                 spinner.visibility = View.GONE
             },3000)
 
+        }).start()
+    }
+
+    private fun LaunchProgressBar2() {
+        Thread(Runnable {
+            for (i in 1..10) {
+                runOnUiThread {
+                    label.text = "Hola $i"
+                    spinner.visibility = View.VISIBLE
+                }
+                Thread.sleep(1000)
+
+                runOnUiThread{
+                    spinner.visibility = View.GONE
+                }
+            }
         }).start()
     }
 
