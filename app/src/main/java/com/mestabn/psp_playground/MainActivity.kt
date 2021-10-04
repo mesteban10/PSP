@@ -1,9 +1,13 @@
-package com.mestebn.playground
+package com.mestabn.psp_playground
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.mestabn.psp_playground.R
 
@@ -11,12 +15,13 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var label: TextView
     lateinit var button: Button
+    lateinit var spinner : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupView()
-        launchMultipleThreads()
+
 
     }
 
@@ -27,10 +32,15 @@ class MainActivity : AppCompatActivity() {
     private fun setupView() { //lo ejecuta el hilo de la IU
         label = findViewById(R.id.label)
         button = findViewById(R.id.buttom)
+        spinner = findViewById(R.id.spinner)
         button.setOnClickListener {
             //launchARN()
             //withThread()
-            launchInsideThread2()
+            //launchInsideThread2()
+            //postDeLayed()
+            //launchMultipleThreads()
+            LaunchProgressBar()
+
         }
 
     }
@@ -98,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         thread.start()
     }
 
-    private fun launchMultipleThreads(){
+    private fun launchMultipleThreads() {
         val thread1 = Thread(Runnable { //cuando le doy a run se crea un proceso del proyecto
             for (i in 1..100) {
                 Log.d("@dev", "Thread-2 $i")
@@ -130,13 +140,14 @@ class MainActivity : AppCompatActivity() {
         thread3.start()
     }
 
+
     //Podemos crear distintos hilos que corran al mismo tiempo
 
     /*
     HILO DENTRO DE HILO
      */
 
-    private fun launchInsideThread(){
+    private fun launchInsideThread() {
         Thread(Runnable { //cuando le doy a run se crea un proceso del proyecto
             for (i in 1..100) {
                 Log.d("@dev", "Thread-1 $i")
@@ -166,6 +177,35 @@ class MainActivity : AppCompatActivity() {
                 Log.d("@dev", "thread1 $i")
                 Thread.sleep(2000)
             }
+        }).start()
+    }
+
+    /**
+     * Hilo con retraso
+     */
+
+    private fun postDeLayed() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            label.text = "Hola!"
+        }, 3000)
+    }
+
+
+    private fun LaunchProgressBar() {
+        Thread(Runnable {
+            for (i in 1..10) {
+                runOnUiThread {
+                    label.text = "Hola $i"
+                }
+                Thread.sleep(1000)
+            }
+            runOnUiThread{
+                spinner.visibility = View.VISIBLE
+            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                spinner.visibility = View.GONE
+            },3000)
+
         }).start()
     }
 
