@@ -1,4 +1,4 @@
-package com.mestabn.psp_playground
+package com.mestabn.psp_playground.ut01
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.mestabn.psp_playground.R
 
-class MainActivity : AppCompatActivity() {
+class ThreadActivity : AppCompatActivity() {
 
     lateinit var label: TextView
     lateinit var button: Button
