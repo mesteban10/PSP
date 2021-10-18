@@ -39,8 +39,8 @@ class ThreadActivity : AppCompatActivity() {
             //launchInsideThread2()
             //postDeLayed()
             //launchMultipleThreads()
-            //LaunchProgressBar()
-            LaunchProgressBarInFor()
+            //launchProgressBar()
+            launchProgressBarInFor()
         }
 
     }
@@ -95,7 +95,7 @@ class ThreadActivity : AppCompatActivity() {
 
     }
 
-    private fun ThreadFormParam() { //actualiza en el hilo de la UI y despues sigue con el otro hilo
+    private fun threadFormParam() { //actualiza en el hilo de la UI y despues sigue con el otro hilo
         val thread = Thread(Runnable { //cuando le doy a run se crea un proceso del proyecto
             for (i in 1..100) {
                 runOnUiThread { //metodo que hace lo mismo que el post
@@ -191,7 +191,7 @@ class ThreadActivity : AppCompatActivity() {
     }
 
 
-    private fun LaunchProgressBar() {
+    private fun launchProgressBar() {
         Thread(Runnable {
             for (i in 1..10) {
                 runOnUiThread {
@@ -209,12 +209,12 @@ class ThreadActivity : AppCompatActivity() {
         }).start()
     }
 
-    private fun LaunchProgressBarInFor() {
+    private fun launchProgressBarInFor() {
+        spinner.visibility = View.VISIBLE
         Thread(Runnable {
             for (i in 1..10) {
                 runOnUiThread {
                     label.text = "Hola $i"
-                    spinner.visibility = View.VISIBLE
                 }
                 Thread.sleep(1000)
 
