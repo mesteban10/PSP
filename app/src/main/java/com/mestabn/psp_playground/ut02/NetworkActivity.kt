@@ -19,15 +19,17 @@ class NetworkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_network)
-        //testSyncApi() //No se puede hacer la llamada dentro del hilo ppal a la API, al MockApiClient si
-        testAsyncApi() //Llamada dentro de un hilo
+        //testSyncApiUsers() //No se puede hacer la llamada dentro del hilo ppal a la API, al MockApiClient si
+        //testAsyncApiUsers() //Llamada dentro de un hilo
+        //testSyncApiPosts()
+        testAsyncApiPosts()
 
     }
 
     /**
      * Función que ejecuta el cliente en modo síncrono: Crash cuando accedemos a API.
      */
-    private fun testSyncApi() {
+    private fun testSyncApiUsers() {
         val users = apiClient.getUsers()
         if (users.isNotEmpty()) {
             users.forEach {
@@ -41,7 +43,7 @@ class NetworkActivity : AppCompatActivity() {
     /**
      * Función que ejecuta el cliente en modo asíncrono, en un hilo diferente a la UI.
      */
-    private fun testAsyncApi() {
+    private fun testAsyncApiUsers() {
         val threadNetwotk = Thread(Runnable {
             val users = apiClient.getUsers()
             if (users.isNotEmpty()) {
@@ -54,5 +56,37 @@ class NetworkActivity : AppCompatActivity() {
         })
         threadNetwotk.start()
     }
+
+    /**
+     * Función que ejecuta el post en modo síncrono: Crash cuando accedemos a API.
+     */
+    private fun testSyncApiPosts() {
+        val posts = apiClient.getPosts()
+        if (posts.isNotEmpty()) {
+            posts.forEach {
+                Log.i(TAG, "$it")
+            }
+        } else {
+            Log.i(TAG, "Post list is empty")
+        }
+    }
+
+    /**
+     * Función que ejecuta el post en modo asíncrono, en un hilo diferente a la UI.
+     */
+    private fun testAsyncApiPosts() {
+        val threadNetwotk = Thread(Runnable {
+            val posts = apiClient.getPosts()
+            if (posts.isNotEmpty()) {
+                posts.forEach {
+                    Log.i(TAG, "$it")
+                }
+            } else {
+                Log.i(TAG, "Post list is empty")
+            }
+        })
+        threadNetwotk.start()
+    }
+
 
 }

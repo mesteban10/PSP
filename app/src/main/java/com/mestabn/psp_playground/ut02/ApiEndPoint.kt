@@ -12,5 +12,5 @@ interface ApiEndPoint {
     fun getUsers(): Call<List<UserApiModel>>  //Devuelve un listado de modelos definidos previamente (UserApiModel)
 
     @GET("posts")
-    fun getPost(): Call<List<UserApiModel>>  //Devuelve un listado de modelos definidos previamente (UserApiModel)
+    fun getPost(): Call<List<PostApiModel>>  //Devuelve un listado de modelos definidos previamente (UserApiModel)
 }
