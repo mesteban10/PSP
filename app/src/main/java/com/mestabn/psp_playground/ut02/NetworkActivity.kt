@@ -22,7 +22,8 @@ class NetworkActivity : AppCompatActivity() {
         //testSyncApiUsers() //No se puede hacer la llamada dentro del hilo ppal a la API, al MockApiClient si
         //testAsyncApiUsers() //Llamada dentro de un hilo
         //testSyncApiPosts()
-        testAsyncApiPosts()
+        //testAsyncApiPosts()
+        testAsyncApiUser()
 
     }
 
@@ -87,6 +88,16 @@ class NetworkActivity : AppCompatActivity() {
         })
         threadNetwotk.start()
     }
+
+    private fun testAsyncApiUser() {
+        val threadNetwotk = Thread(Runnable {
+            val user = apiClient.getUser(4)
+            Log.i(TAG, user.toString())
+
+        })
+        threadNetwotk.start()
+    }
+
 
 
 }

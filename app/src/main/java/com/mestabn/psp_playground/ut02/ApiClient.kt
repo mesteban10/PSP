@@ -13,6 +13,7 @@ import javax.security.auth.callback.Callback
 interface ApiClient {
     fun getUsers(): List<UserApiModel>
     fun getPosts(): List<PostApiModel>
+    fun getUser(userId: Int): UserApiModel?
 }
 
 /**
@@ -21,30 +22,31 @@ interface ApiClient {
  */
 
 class MockApiClient : ApiClient {
-    override fun getUsers():List<UserApiModel>{
+    override fun getUsers(): List<UserApiModel> {
         return mutableListOf(
-            UserApiModel(1,"Usuario1", "user1","user@email.es"),
-            UserApiModel(2,"Usuario1", "user2","user@email.es"),
-            UserApiModel(3,"Usuario1", "user3","user@email.es"),
-            UserApiModel(4,"Usuario1", "user4","user@email.es"),
+            UserApiModel(1, "Usuario1", "user1", "user@email.es"),
+            UserApiModel(2, "Usuario1", "user2", "user@email.es"),
+            UserApiModel(3, "Usuario1", "user3", "user@email.es"),
+            UserApiModel(4, "Usuario1", "user4", "user@email.es"),
 
-        )
+            )
     }
 
-    override fun getPosts(): List<PostApiModel>{
+    override fun getPosts(): List<PostApiModel> {
         return mutableListOf(
-            PostApiModel(1,1, "user1","user@email.es"),
-            PostApiModel(2,2, "user1","user@email.es"),
-            PostApiModel(3,3, "user1","user@email.es"),
-            PostApiModel(4,4, "user1","user@email.es"),
+            PostApiModel(1, 1, "user1", "user@email.es"),
+            PostApiModel(2, 2, "user1", "user@email.es"),
+            PostApiModel(3, 3, "user1", "user@email.es"),
+            PostApiModel(4, 4, "user1", "user@email.es"),
 
 
             )
     }
 
+    override fun getUser(userId: Int): UserApiModel {
+        return UserApiModel(1, "Usuario1", "user1", "user@email.es")
 
-
-
+    }
 }
 
 /**
@@ -87,11 +89,11 @@ class RetrofitApiClient : ApiClient {
 
     override fun getUsers(): List<UserApiModel> {
         val call = apiEndPoint.getUsers()
-        val response=call.execute()
-        if (response.isSuccessful){
+        val response = call.execute()
+        if (response.isSuccessful) {
             val users = response.body()
             return users ?: mutableListOf()
-        }else{
+        } else {
             return mutableListOf()
         }
     }
@@ -99,16 +101,30 @@ class RetrofitApiClient : ApiClient {
     override fun getPosts(): List<PostApiModel> {
         val call = apiEndPoint.getPost()
         val response = call.execute()
-        if (response.isSuccessful){
+        if (response.isSuccessful) {
             val posts = response.body()
             return posts ?: mutableListOf()
-        }else{
+        } else {
             return mutableListOf()
         }
     }
 
 
+    override fun getUser(userId: Int): UserApiModel? {
+        val call = apiEndPoint.getUser(userId)
+        val response = call.execute()
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
+    }
+
+
 }
+
+
+
 
 
 
