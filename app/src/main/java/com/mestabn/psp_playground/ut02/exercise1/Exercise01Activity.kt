@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.jmperezra.psp_playground.R
 import com.mestabn.psp_playground.R
 import com.mestabn.psp_playground.ut02.exercise1.data.UserRepository
 
-class Exercise02Activity : AppCompatActivity() {
+class Exercise01Activity : AppCompatActivity() {
 
-    private val TAG: String = Exercise02Activity::class.java.simpleName
+    private val TAG: String = Exercise01Activity::class.java.simpleName
 
     private val apiClientFactory: ApiClientFactory = ApiClientFactory()
     //Es lo mismo que en la linea anterior - > private val apiClientFactory = ApiClientFactory()
@@ -37,6 +36,7 @@ class Exercise02Activity : AppCompatActivity() {
         //obtengo la abstracción del ApiClient a usar
         val userRepository = UserRepository(apiClientFactory.build(actionId))
 
+        val threadExercise01Activity = Thread(Runnable {
         //Visualizo el listado de usuarios
         val users = userRepository.getUsers()
         users.forEach { userApiModel ->
@@ -48,5 +48,7 @@ class Exercise02Activity : AppCompatActivity() {
         user?.run {
             Log.d(TAG, "$this")
         }
+        })
+        threadExercise01Activity.start()
     }
 }
