@@ -1,13 +1,13 @@
 package com.mestabn.psp_playground.ut02.exercise1.data
 
-class UserRepository()  {
+class UserRepository(private val apiClient: ApiClient)  {
 
     fun getUser(userId: Int) : UserApiModel{
-        return getUser(userId)
+        return apiClient.getUser(userId)
     }
 
     fun getUsers() : List<UserApiModel>{
-        return getUsers()
+        return apiClient.getUsers()
     }
 
 
