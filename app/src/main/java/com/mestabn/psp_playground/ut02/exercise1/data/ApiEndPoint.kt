@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 interface ApiEndPoint {
     @GET("users")
-    fun getUsers(): Call<List<UserApiModel>>  //Devuelve un listado de modelos definidos previamente (UserApiModel)
+    fun getUsers(): Call<List<UserApiModel>>
 
     @GET("users/{id}")
     fun getUser(@Path("id") userId: Int): Call<UserApiModel>

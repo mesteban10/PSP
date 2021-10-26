@@ -7,13 +7,10 @@ import com.mestabn.psp_playground.ut02.exercise1.data.RetrofitApiClient
 
 class ApiClientFactory {
 
-    fun build (actionId: Int): ApiClient {
-        //Cuando pulsamos el botón, dependiendo del id llama a una clase u otra
-        return when(actionId){
-            R.id.action_mock -> MockApiClient()
-           R.id.action_api -> RetrofitApiClient()
-            else -> MockApiClient()
-        }
-
+    fun build(actionId: Int): ApiClient = when (actionId) {
+        R.id.action_mock -> MockApiClient()
+        R.id.action_api -> RetrofitApiClient()
+        else -> MockApiClient()
     }
+
 }

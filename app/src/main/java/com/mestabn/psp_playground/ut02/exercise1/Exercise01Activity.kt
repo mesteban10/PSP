@@ -36,18 +36,18 @@ class Exercise01Activity : AppCompatActivity() {
         //obtengo la abstracción del ApiClient a usar
         val userRepository = UserRepository(apiClientFactory.build(actionId))
 
-        val threadExercise01Activity = Thread(Runnable {
-        //Visualizo el listado de usuarios
-        val users = userRepository.getUsers()
-        users.forEach { userApiModel ->
-            Log.d(TAG, "$userApiModel")
-        }
+        val threadExercise01Activity: Thread = Thread(Runnable {
+            //Visualizo el listado de usuarios
+            val users = userRepository.getUsers()
+            users.forEach { userApiModel ->
+                Log.d(TAG, "$userApiModel")
+            }
 
-        //Obtengo un usuario y visualizo el usuario
-        val user = userRepository.getUser(1)
-        user?.run {
-            Log.d(TAG, "$this")
-        }
+            //Obtengo un usuario y visualizo el usuario
+            val user = userRepository.getUser(1)
+            user?.run {
+                Log.d(TAG, "$this")
+            }
         })
         threadExercise01Activity.start()
     }

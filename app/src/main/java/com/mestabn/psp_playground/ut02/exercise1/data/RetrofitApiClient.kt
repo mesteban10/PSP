@@ -5,25 +5,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitApiClient : ApiClient {
 
-    private val urlEndPoint: String = "https://jsonplaceholder.typicode.com/" //URL del proyecto
-    private var apiEndPoint: ApiEndPoint  //Interfaz necesaria de retrofit
+    private val urlEndPoint: String = "https://jsonplaceholder.typicode.com/"
+    private var apiEndPoint: ApiEndPoint
 
     init {
-        apiEndPoint = buildApiService() //Creo en objeto retrofit
+        apiEndPoint = buildApiService()
     }
 
-
-    private fun buildApiService(): ApiEndPoint {
-        return buildClient().create(ApiEndPoint::class.java) //llamo a retrofit, y la creo con la interfaz ApiEndPoint
-    }
+    private fun buildApiService(): ApiEndPoint = buildClient().create(ApiEndPoint::class.java)
 
 
-    private fun buildClient(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(urlEndPoint) //Establezco URL de la API
-            .addConverterFactory(GsonConverterFactory.create()) //Usamos GSon
-            .build()
-    }
+    private fun buildClient(): Retrofit = Retrofit.Builder()
+        .baseUrl(urlEndPoint)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
 
     override fun getUsers(): List<UserApiModel> {
@@ -36,7 +31,6 @@ class RetrofitApiClient : ApiClient {
             mutableListOf()
         }
     }
-
 
     override fun getUser(userId: Int): UserApiModel? {
         val call = apiEndPoint.getUser(userId)
