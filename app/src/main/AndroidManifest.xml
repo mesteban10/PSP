@@ -12,20 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PSPPlayGround">
         <activity
+            android:name=".ut02.exercise02.presentation.AlertsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".ut01.ThreadActivity"
             android:exported="true" />
-
         <activity
             android:name=".ut02.exercise1.Exercise01Activity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
     </application>
 

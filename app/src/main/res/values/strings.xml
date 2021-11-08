@@ -2,4 +2,6 @@
     <string name="app_name">PSP-PlayGround</string>
     <string name="action_mock">Mock</string>
     <string name="action_api">Api</string>
+
+    <string name="title_text_ut02">UT-02: Comunicaciones en red: Retrofit</string>
 </resources>
