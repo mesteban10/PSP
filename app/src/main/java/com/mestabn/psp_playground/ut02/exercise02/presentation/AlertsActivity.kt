@@ -33,5 +33,10 @@ class AlertsActivity : AppCompatActivity() {
             Log.d("@dev", model.toString())
         }.start()
 
+        Thread {
+            val model = repository.fetch(1671086)
+            Log.d("@dev", model.toString())
+        }.start()
+
     }
 }

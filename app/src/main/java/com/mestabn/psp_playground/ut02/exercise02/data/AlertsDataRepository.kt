@@ -10,4 +10,9 @@ class AlertsDataRepository(private val alertRemote: AlertRemoteSource) : AlertsR
         return alertRemote.getAlerts()
     }
 
+    override fun fetch(alertId: Int): AlertModels? {
+        return alertRemote.getAlert(alertId)
+    }
+
+
 }

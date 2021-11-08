@@ -12,4 +12,8 @@ class MockApiAlerts : ApiAlert {
             AlertApiModel("4", "Titulo 4", "Resumen alerta 4", "2", "2021-01-07"),
             AlertApiModel("5", "Titulo 5", "Resumen alerta 5", "1", "2021-01-06"),
         )
+
+    override fun getAlert(alertId: String): AlertApiModel? {
+        return AlertApiModel("1", "Titulo 1", "Resumen alerta 1", "1", "2021-01-10")
+    }
 }

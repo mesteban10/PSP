@@ -10,4 +10,13 @@ class AlertRemoteSource(private val apiAlert: ApiAlert) {
         val alertApiModel = apiAlert.getAlerts()
         return alertApiModel.map { apiModel -> apiModel.toDomainModel() }
     }
+
+    fun getAlert(alertId : Int): AlertModels?{
+        val alertApiModel = apiAlert.getAlert(alertId.toString())
+        if (alertApiModel != null) {
+            return alertApiModel.toDomainModel()
+        }
+        return null
+    }
+
 }

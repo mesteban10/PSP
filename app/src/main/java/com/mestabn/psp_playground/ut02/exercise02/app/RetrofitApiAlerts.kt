@@ -47,4 +47,14 @@ class RetrofitApiAlerts : ApiAlert {
             mutableListOf()
         }
     }
+    override fun getAlert(alertId: String): AlertApiModel? {
+        val call = apiEndPoint.getAlert(alertId)
+        val response = call.execute()
+        return if (response.isSuccessful) {
+            response.body()?.data
+        } else {
+            null
+        }
+    }
+
 }
