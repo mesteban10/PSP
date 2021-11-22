@@ -9,18 +9,31 @@ import com.mestabn.psp_playground.ut02.exercise02.app.RetrofitApiAlerts
 import com.mestabn.psp_playground.ut02.exercise02.data.AlertsDataRepository
 import com.mestabn.psp_playground.ut02.exercise02.data.remote.AlertRemoteSource
 import com.mestabn.psp_playground.ut02.exercise02.domain.AlertsRepository
+import com.mestabn.psp_playground.ut02.exercise02.domain.GetAlertUseCase
+import com.mestabn.psp_playground.ut02.exercise02.domain.GetAlertsUseCase
 
 class AlertsActivity : AppCompatActivity() {
 
     private val TAG = AlertsActivity::class.java.simpleName
-    private val repository: AlertsRepository =
-        AlertsDataRepository(AlertRemoteSource(RetrofitApiAlerts()))
+    private val viewModelAlerts: AlertsViewModel = AlertsViewModel(
+        GetAlertsUseCase(
+            AlertsDataRepository(
+                AlertRemoteSource(RetrofitApiAlerts())
+            )
+        ), GetAlertUseCase(
+            AlertsDataRepository(
+                AlertRemoteSource(RetrofitApiAlerts())
+            )
+        )
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alerts)
         setupView()
         render()
+
     }
 
     private fun setupView() {
@@ -28,15 +41,9 @@ class AlertsActivity : AppCompatActivity() {
     }
 
     private fun render() {
-        Thread {
-            val model = repository.fetchAll()
-            Log.d("@dev", model.toString())
-        }.start()
-
-        Thread {
-            val model = repository.fetch(1671086)
-            Log.d("@dev", model.toString())
-        }.start()
+        viewModelAlerts.getAlerts()
 
     }
+
+
 }
