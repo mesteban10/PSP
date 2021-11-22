@@ -1,6 +1,9 @@
 package com.mestabn.psp_playground.ut02.exercise02.app
 
 import com.mestabn.psp_playground.ut02.exercise02.data.remote.AlertApiModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,9 +40,8 @@ class RetrofitApiAlerts : ApiAlert {
             .build()*/
 
 
-    override fun getAlerts(): List<AlertApiModel> {
-        val call = apiEndPoint.getAlerts()
-        val response = call.execute()
+    override suspend fun getAlerts(): List<AlertApiModel> = with(Dispatchers.IO) {
+        val response = apiEndPoint.getAlerts()
         return if (response.isSuccessful) {
             response.body()?.data ?: mutableListOf()
 
@@ -47,9 +49,9 @@ class RetrofitApiAlerts : ApiAlert {
             mutableListOf()
         }
     }
-    override fun getAlert(alertId: String): AlertApiModel? {
-        val call = apiEndPoint.getAlert(alertId)
-        val response = call.execute()
+
+    override suspend fun getAlert(alertId: String): AlertApiModel? = with(Dispatchers.IO) {
+        val response = apiEndPoint.getAlert(alertId)
         return if (response.isSuccessful) {
             response.body()?.data
         } else {
