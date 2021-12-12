@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/9.291/AndroidStudioProjects/PSPPlayGround/app/src/main/res/layout/activity_alerts.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/9.291/AndroidStudioProjects/PSPPlayGround/app/src/main/res/layout/activity_main.xml" value="0.15555555555555556" />
         <entry key="..\:/Users/9.291/AndroidStudioProjects/PSPPlayGround/app/src/main/res/layout/activity_main2.xml" value="0.2861111111111111" />
         <entry key="..\:/Users/9.291/AndroidStudioProjects/PSPPlayGround/app/src/main/res/layout/activity_network.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/maria/AndroidStudioProjects/PSP/app/src/main/res/layout/activity_exercise01.xml" value="0.1" />
       </map>
     </option>
   </component>
